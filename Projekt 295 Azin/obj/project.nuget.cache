@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sLEONNUzEO7SzajZB1NT7N+fCNDlva7UGpNdzDJ9rfXTVW058ZYKyYyVDBZAXsPoqEVWgiLno90nA6QjzQ2Ziw==",
+  "dgSpecHash": "nfFm2lK51Qwq4Umunq6GJ4Pe+dY8dQxJmE/HwkOYxtJ/NeIS8ycaD/dU5RQ8cN5snlkt/vL5nBbahlnL6UqIsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\azini\\OneDrive - ipso! Bildung\\2Lehrjahr-A.I\\Ict\\Modul 295 - Backend für Applikationen realisieren\\Projekt 295 Azin\\Projekt-295-Azin\\Projekt 295 Azin\\Projekt 295 Azin.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,8 @@
     "C:\\Users\\azini\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\azini\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\azini\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\azini\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\azini\\.nuget\\packages\\nunit\\3.14.0\\nunit.3.14.0.nupkg.sha512",
     "C:\\Users\\azini\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\azini\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\azini\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
