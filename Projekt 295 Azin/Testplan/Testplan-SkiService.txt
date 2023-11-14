@@ -1,0 +1,42 @@
+Testplan vom Projekt Ski-Service Management Azin Ildas
+
+1. Einführung
+Dieses Dokument beschreibt den Testplan des Projekts 295 Azin.
+
+2. Testziele
+Ziel ist es, die Funktionalität und Integrität der Bestellungsverarbeitung sicherzustellen.
+
+3. Testumfang
+- Unit-Tests für die Klasse "Bestellungen" in Bestellungen.cs.
+- Überprüfung der Felder auf korrekte Datentypen und Formate.
+
+4. Teststrategie
+- Manuelle Tests der Benutzeroberfläche.
+- Automatisierte Unit-Tests mit NUnit.
+
+5. Testumgebung
+- Lokale Entwicklungsumgebung unter Verwendung von Visual Studio.
+- .NET Core oder .NET, je nach Projekt.
+
+6. Pass-/Fail-Kriterien
+- Ein Test gilt als bestanden, wenn alle Assertions ohne Fehler durchlaufen.
+- Ein Test gilt als nicht bestanden, wenn mindestens eine Assertion fehlschlägt.
+
+7. Testzeitplan
+- Beginn der Testentwicklung: 13.11.2023.
+- Ausführung der Unit-Tests: 14.11.2023 - 15.11.2023.
+- Überprüfung und Korrekturen: 14.11.2023 - 15.11.2023.
+
+8. Testvorbereitung
+- Sicherstellen, dass alle Abhängigkeiten korrekt installiert sind.
+- Vorbereitung von Testdaten für die Unit-Tests.
+
+9. Testfälle
+- Testfall 1: BestellungKannErstelltWerdenMitInitialWerten
+- Testfall 2: BestellungFelderÜberprüfung
+
+10. Testausführung
+- Tests werden über die Test-Explorer in Visual Studio oder über die CLI mit `dotnet test` ausgeführt.
+
+11. Dokumentation und Berichterstattung
+- Ergebnisse werden nach jedem Testlauf dokumentiert und in einem Testbericht zusammengefasst.
