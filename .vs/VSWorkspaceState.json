@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\Projekt 295 Azin"
   ],
+  "SelectedNode": "\\Projekt 295 Azin\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
