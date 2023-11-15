@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt_295_Azin.Models;
-using Projekt_295_Azin.Models;
 
 namespace Projekt_295_Azin.Controllers
 {
@@ -24,10 +23,9 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// Gibt alle Bestellungen zurück.
+        /// Ruft alle Bestellungen ab.
         /// </summary>
-        /// <returns>Liste aller Bestellungen.</returns>
-        // GET: api/<BestellungenController>
+        /// <returns>Eine Aktionsergebnisinstanz mit der Liste aller Bestellungen.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bestellungen>>> Get()
         {
@@ -35,11 +33,10 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// Gibt eine spezifische Bestellung anhand ihrer ID zurück.
+        /// Ruft eine Bestellung anhand ihrer eindeutigen ID ab.
         /// </summary>
-        /// <param name="id">Die ID der Bestellung.</param>
-        /// <returns>Die angeforderte Bestellung.</returns>
-        // GET api/<BestellungenController>/5
+        /// <param name="id">Die ID der Bestellung, die abgerufen werden soll.</param>
+        /// <returns>Die Bestellung, wenn sie gefunden wurde, andernfalls ein NotFound-Ergebnis.</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Bestellungen>> Get(int id)
         {
@@ -54,11 +51,10 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// Fügt eine neue Bestellung hinzu.
+        /// Erstellt eine neue Bestellung.
         /// </summary>
-        /// <param name="bestellung">Die hinzuzufügende Bestellung.</param>
-        /// <returns>Die erstellte Bestellung.</returns>
-        // POST api/<BestellungenController>
+        /// <param name="bestellung">Das Bestellungsobjekt, das erstellt werden soll.</param>
+        /// <returns>Ein CreatedAtAction-Ergebnis mit der neu erstellten Bestellung.</returns>
         [HttpPost]
         public async Task<ActionResult<Bestellungen>> PostBestellungen(Bestellungen bestellung)
         {
@@ -69,12 +65,11 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// Aktualisiert eine vorhandene Bestellung.
+        /// Aktualisiert eine bestehende Bestellung anhand ihrer ID mit den angegebenen Daten.
         /// </summary>
         /// <param name="id">Die ID der zu aktualisierenden Bestellung.</param>
-        /// <param name="bestellung">Die aktualisierten Daten der Bestellung.</param>
-        /// <returns>Ein Ergebnis ohne Inhalt, wenn die Aktualisierung erfolgreich war.</returns>
-        // PUT api/<BestellungenController>/5
+        /// <param name="bestellung">Die neuen Daten für die Bestellung.</param>
+        /// <returns>Ein NoContent-Ergebnis, wenn die Aktualisierung erfolgreich war.</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBestellung(int id, Bestellungen bestellung)
         {
@@ -104,18 +99,11 @@ namespace Projekt_295_Azin.Controllers
             return NoContent();
         }
 
-        // Überprüft, ob eine Bestellung mit der gegebenen ID existiert.
-        private bool BestellungExists(int id)
-        {
-            return _context.Bestellungens.Any(e => e.BestellungsId == id);
-        }
-
         /// <summary>
-        /// Löscht eine spezifische Bestellung anhand ihrer ID.
+        /// Löscht eine Bestellung anhand ihrer ID.
         /// </summary>
-        /// <param name="id">Die ID der zu löschenden Bestellung.</param>
-        /// <returns>Ein Ergebnis ohne Inhalt, wenn das Löschen erfolgreich war.</returns>
-        // DELETE api/<BestellungenController>/5
+        /// <param name="id">Die ID der Bestellung, die gelöscht werden soll.</param>
+        /// <returns>Ein NoContent-Ergebnis, wenn das Löschen erfolgreich war.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -129,6 +117,16 @@ namespace Projekt_295_Azin.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// Überprüft, ob eine Bestellung mit der gegebenen ID existiert.
+        /// </summary>
+        /// <param name="id">Die zu überprüfende ID.</param>
+        /// <returns>True, wenn die Bestellung existiert, andernfalls False.</returns>
+        private bool BestellungExists(int id)
+        {
+            return _context.Bestellungens.Any(e => e.BestellungsId == id);
         }
     }
 }
