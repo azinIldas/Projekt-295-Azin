@@ -1,36 +1,41 @@
 ﻿{
+  // Verweist auf das Schema für die launchsettings.json Datei
   "$schema": "https://json.schemastore.org/launchsettings.json",
+
+  // Einstellungen spezifisch für IIS Express
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "windowsAuthentication": false, // Deaktiviert Windows-Authentifizierung
+    "anonymousAuthentication": true, // Aktiviert anonyme Authentifizierung
     "iisExpress": {
-      "applicationUrl": "http://localhost:55988",
-      "sslPort": 44331
+      "applicationUrl": "http://localhost:55988", // URL für die Anwendung
+      "sslPort": 44331 // SSL-Port für HTTPS
     }
   },
+
+  // Verschiedene Startprofile für die Anwendung
   "profiles": {
     "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5240",
+      "commandName": "Project", // Befehlsname für das HTTP-Profil
+      "dotnetRunMessages": true, // Anzeige von .NET Laufzeitnachrichten
+      "launchBrowser": true, // Startet den Browser beim Ausführen
+      "launchUrl": "swagger", // URL, die beim Start geöffnet wird
+      "applicationUrl": "http://localhost:5240", // URL für die Anwendung
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development" // Setzt die Umgebungsvariable auf Entwicklung
       }
     },
     "https": {
-      "commandName": "Project",
+      "commandName": "Project", // Befehlsname für das HTTPS-Profil
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7037;http://localhost:5240",
+      "applicationUrl": "https://localhost:7037;http://localhost:5240", // URLs für HTTPS und HTTP
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "IIS Express": {
-      "commandName": "IISExpress",
+      "commandName": "IISExpress", // Befehlsname für das IIS Express-Profil
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
