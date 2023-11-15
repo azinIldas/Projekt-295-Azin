@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekt_295_Azin.Models;
-using Projekt_295_Azin.Models;
 
 namespace Projekt_295_Azin
 {
