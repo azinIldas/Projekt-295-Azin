@@ -38,7 +38,7 @@ namespace Projekt_295_Azin
                 builder.Services.AddCors(options =>
                 {
                     options.AddPolicy("MyCorsPolicy",
-                        builder => builder.WithOrigins("http://example.com")
+                        builder => builder.WithOrigins("*")
                                           .AllowAnyHeader()
                                           .AllowAnyMethod());
                 });
