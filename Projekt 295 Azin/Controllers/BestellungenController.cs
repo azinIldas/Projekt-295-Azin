@@ -3,21 +3,30 @@ using Microsoft.EntityFrameworkCore;
 using Projekt_295_Azin.Models;
 using Projekt_295_Azin.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Projekt_295_Azin.Controllers
 {
+    /// <summary>
+    /// Controller für die Verwaltung von Bestellungen.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BestellungenController : ControllerBase
     {
         private readonly BlogContext _context;
 
+        /// <summary>
+        /// Konstruktor des BestellungenControllers.
+        /// </summary>
+        /// <param name="context">Der Datenbankkontext.</param>
         public BestellungenController(BlogContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Gibt alle Bestellungen zurück.
+        /// </summary>
+        /// <returns>Liste aller Bestellungen.</returns>
         // GET: api/<BestellungenController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bestellungen>>> Get()
@@ -25,6 +34,11 @@ namespace Projekt_295_Azin.Controllers
             return await _context.Bestellungens.ToListAsync();
         }
 
+        /// <summary>
+        /// Gibt eine spezifische Bestellung anhand ihrer ID zurück.
+        /// </summary>
+        /// <param name="id">Die ID der Bestellung.</param>
+        /// <returns>Die angeforderte Bestellung.</returns>
         // GET api/<BestellungenController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Bestellungen>> Get(int id)
@@ -39,6 +53,11 @@ namespace Projekt_295_Azin.Controllers
             return bestellung;
         }
 
+        /// <summary>
+        /// Fügt eine neue Bestellung hinzu.
+        /// </summary>
+        /// <param name="bestellung">Die hinzuzufügende Bestellung.</param>
+        /// <returns>Die erstellte Bestellung.</returns>
         // POST api/<BestellungenController>
         [HttpPost]
         public async Task<ActionResult<Bestellungen>> PostBestellungen(Bestellungen bestellung)
@@ -49,9 +68,12 @@ namespace Projekt_295_Azin.Controllers
             return CreatedAtAction(nameof(Get), new { id = bestellung.BestellungsId }, bestellung);
         }
 
-
-
-
+        /// <summary>
+        /// Aktualisiert eine vorhandene Bestellung.
+        /// </summary>
+        /// <param name="id">Die ID der zu aktualisierenden Bestellung.</param>
+        /// <param name="bestellung">Die aktualisierten Daten der Bestellung.</param>
+        /// <returns>Ein Ergebnis ohne Inhalt, wenn die Aktualisierung erfolgreich war.</returns>
         // PUT api/<BestellungenController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBestellung(int id, Bestellungen bestellung)
@@ -82,13 +104,17 @@ namespace Projekt_295_Azin.Controllers
             return NoContent();
         }
 
+        // Überprüft, ob eine Bestellung mit der gegebenen ID existiert.
         private bool BestellungExists(int id)
         {
             return _context.Bestellungens.Any(e => e.BestellungsId == id);
         }
 
-
-
+        /// <summary>
+        /// Löscht eine spezifische Bestellung anhand ihrer ID.
+        /// </summary>
+        /// <param name="id">Die ID der zu löschenden Bestellung.</param>
+        /// <returns>Ein Ergebnis ohne Inhalt, wenn das Löschen erfolgreich war.</returns>
         // DELETE api/<BestellungenController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -106,4 +132,3 @@ namespace Projekt_295_Azin.Controllers
         }
     }
 }
-
