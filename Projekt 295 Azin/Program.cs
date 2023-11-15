@@ -1,93 +1,72 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekt_295_Azin.Models;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
+using Projekt_295_Azin.Models;
 
 namespace Projekt_295_Azin
 {
     /// <summary>
-    /// Hauptklasse der Anwendung welches den Webdienst konfiguriert und startet.
+    /// Hauptklasse der Anwendung welches den webdinst konfiguriert und startet
     /// </summary>
     public class Program
     {
         public static string _connectionString;
 
         /// <summary>
-        /// Einstiegspunkt der Anwendung.
+        /// Einstieggspunkt der Anwendung.
         /// </summary>
         /// <param name="args">Kommandozeilenargumente</param>
         public static void Main(string[] args)
         {
-            // Konfigurieren Sie Serilog für die Protokollierung in Dateien
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
+            var builder = WebApplication.CreateBuilder(args);
 
-            try
+            // Konfiguration von CORS 
+            builder.Services.AddCors(options =>
             {
-                var builder = WebApplication.CreateBuilder(args);
+                options.AddPolicy("MyCorsPolicy",
+                    builder => builder.WithOrigins("http://example.com")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
+            });
 
-                // Fügen Sie Serilog als Protokollierungsdienst hinzu
-                builder.Host.UseSerilog();
+            // Hinzufügen des ControllerServices zur Verarbeitung von HTTP Anfragen
+            builder.Services.AddControllers();
 
-                // Konfiguration von CORS 
-                builder.Services.AddCors(options =>
-                {
-                    options.AddPolicy("MyCorsPolicy",
-                        builder => builder.WithOrigins("*")
-                                          .AllowAnyHeader()
-                                          .AllowAnyMethod());
-                });
+            // Einrichtung von Swagger zur Dokumentation und Testung der API
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-                // Hinzufügen des ControllerServices zur Verarbeitung von HTTP-Anfragen
-                builder.Services.AddControllers();
+            // Extrahieren der Datenbankverbindungsinformationen aus der Konfiguration
+            var configuration = builder.Configuration;
+            _connectionString = configuration.GetConnectionString("BackendSkiService");
 
-                // Einrichtung von Swagger zur Dokumentation und Testung der API
-                builder.Services.AddEndpointsApiExplorer();
-                builder.Services.AddSwaggerGen();
+            // Konfiguration des Entity Frameworks für die Verbindung mit SQL Server
+            builder.Services.AddDbContext<BlogContext>(options =>
+                options.UseSqlServer(_connectionString));
 
-                // Extrahieren der Datenbankverbindungsinformationen aus der Konfiguration
-                var configuration = builder.Configuration;
-                _connectionString = configuration.GetConnectionString("BackendSkiService");
+            var app = builder.Build();
 
-                // Konfiguration des Entity Frameworks für die Verbindung mit SQL Server
-                builder.Services.AddDbContext<BlogContext>(options =>
-                    options.UseSqlServer(_connectionString));
-
-                var app = builder.Build();
-
-                // Konfiguration zusätzlicher Komponenten für die HTTP-Anforderungsverarbeitung
-                if (app.Environment.IsDevelopment())
-                {
-                    // Aktivieren von Swagger im Entwicklungsmodus
-                    app.UseSwagger();
-                    app.UseSwaggerUI();
-                }
-
-                // Aktivieren der HTTPS-Umleitung zur Erhöhung der Sicherheit.
-                app.UseHttpsRedirection();
-
-                // Verwendung der konfigurierten CORS-Richtlinie.
-                app.UseCors("MyCorsPolicy");
-
-                // Einrichtung der Autorisierungsmiddleware.
-                app.UseAuthorization();
-
-                // Zuweisung der Controller-Endpunkte.
-                app.MapControllers();
-
-                // Starten der Webanwendung.
-                app.Run();
-            }
-            finally
+            // Konfiguration zusätzlicher Komponenten für die HTTP-Anforderungsverarbeitung
+            if (app.Environment.IsDevelopment())
             {
-                // Stellen Sie sicher, dass Serilog ordnungsgemäß beendet wird
-                Log.CloseAndFlush();
+                // Aktivieren von Swagger im Entwicklungsmodus
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
+
+            // Aktivieren der HTTPS Umleitung zur Erhöhung der Sicherheit.
+            app.UseHttpsRedirection();
+
+            // Verwendung der konfigurierten CORS-Richtlinie.
+            app.UseCors("MyCorsPolicy");
+
+            // Einrichtung der Autorisierungsmiddleware.
+            app.UseAuthorization();
+
+            // Zuweisung der Controller-Endpunkte.
+            app.MapControllers();
+
+            // Starten der Webanwendung.
+            app.Run();
         }
     }
 }
