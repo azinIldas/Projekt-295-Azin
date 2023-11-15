@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekt_295_Azin.Models;
-using Projekt_295_Azin.Models;
 
 namespace Projekt_295_Azin
 {
@@ -23,7 +22,7 @@ namespace Projekt_295_Azin
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("MyCorsPolicy",
-                    builder => builder.WithOrigins("http://example.com") 
+                    builder => builder.WithOrigins("http://127.0.0.1:5500") 
                                       .AllowAnyHeader()
                                       .AllowAnyMethod());
             });

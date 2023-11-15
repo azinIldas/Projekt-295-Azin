@@ -3708,11 +3708,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\azini\\OneDrive - ipso! Bildung\\2Lehrjahr-A.I\\Ict\\Modul 295 - Backend für Applikationen realisieren\\Projekt 295 Azin\\Projekt-295-Azin\\Projekt 295 Azin\\Projekt 295 Azin.csproj",
+      "projectUniqueName": "C:\\Users\\azini\\OneDrive\\Desktop\\Projekt-295-Azin\\Projekt 295 Azin\\Projekt 295 Azin.csproj",
       "projectName": "Projekt 295 Azin",
-      "projectPath": "C:\\Users\\azini\\OneDrive - ipso! Bildung\\2Lehrjahr-A.I\\Ict\\Modul 295 - Backend für Applikationen realisieren\\Projekt 295 Azin\\Projekt-295-Azin\\Projekt 295 Azin\\Projekt 295 Azin.csproj",
+      "projectPath": "C:\\Users\\azini\\OneDrive\\Desktop\\Projekt-295-Azin\\Projekt 295 Azin\\Projekt 295 Azin.csproj",
       "packagesPath": "C:\\Users\\azini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\azini\\OneDrive - ipso! Bildung\\2Lehrjahr-A.I\\Ict\\Modul 295 - Backend für Applikationen realisieren\\Projekt 295 Azin\\Projekt-295-Azin\\Projekt 295 Azin\\obj\\",
+      "outputPath": "C:\\Users\\azini\\OneDrive\\Desktop\\Projekt-295-Azin\\Projekt 295 Azin\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
