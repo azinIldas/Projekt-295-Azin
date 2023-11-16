@@ -3,9 +3,10 @@
     "",
     "\\.github",
     "\\Projekt 295 Azin",
+    "\\Projekt 295 Azin\\Models",
     "\\Projekt 295 Azin\\Testing",
     "\\Projekt 295 Azin\\Testing\\TestProject1"
   ],
-  "SelectedNode": "\\Projekt 295 Azin\\Projekt 295 Azin.sln",
+  "SelectedNode": "\\Projekt 295 Azin\\Models\\Bestellungen.cs",
   "PreviewInSolutionExplorer": false
 }
