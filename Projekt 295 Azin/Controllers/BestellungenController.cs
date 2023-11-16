@@ -62,6 +62,11 @@ namespace Projekt_295_Azin.Controllers
         [HttpPost]
         public async Task<ActionResult<Bestellungen>> PostBestellungen(Bestellungen bestellung)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Bestellungens.Add(bestellung);
             await _context.SaveChangesAsync();
 
