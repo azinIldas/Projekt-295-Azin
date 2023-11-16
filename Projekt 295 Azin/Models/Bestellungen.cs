@@ -13,14 +13,12 @@ namespace Projekt_295_Azin.Models
         public int BestellungsId { get; set; }
 
         [Required(ErrorMessage = "Name ist erforderlich")]
-        [RegularExpression(@"^[a-zA-ZäöüßÄÖÜ\s]+$", ErrorMessage = "Name darf nur Buchstaben enthalten")]
-        // Der Name des Bestellers ist erforderlich und darf nur Buchstaben enthalten (einschließlich Umlaute und ß).
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email-Adresse ist erforderlich")]
-        [EmailAddress(ErrorMessage = "Ungültige Email-Adresse")]
-        [RegularExpression(@".+@.+\..+ch$", ErrorMessage = "Email-Adresse muss mit '.ch' enden")]
-        // Die Emailadresse des Bestellers ist erforderlich, muss ein gültiges Email-Format haben und mit '.ch' enden.
+        // Validiert die E-Mail-Adresse mit einem regulären Ausdruck.
+        // Die E-Mail muss dem Format 'name@domain.tld' entsprechen.
+        [Required(ErrorMessage = "Email ist erforderlich")]
+        [RegularExpression(@".+@.+\..+", ErrorMessage = "Ungültige Email-Adresse")]
         public string Emailadresse { get; set; }
 
         [Required(ErrorMessage = "Telefonnummer ist erforderlich")]
