@@ -244,3 +244,4 @@ C:\Users\azini\OneDrive - ipso! Bildung\2Lehrjahr-A.I\Ict\Modul 295 - Backend f�
 C:\Users\azini\OneDrive - ipso! Bildung\2Lehrjahr-A.I\Ict\Modul 295 - Backend für Applikationen realisieren\SkiServiceAbgeschlossen AzinI\Projekt-295-Azin\Projekt 295 Azin\obj\Debug\net7.0\Projekt 295 Azin.pdb
 C:\Users\azini\OneDrive - ipso! Bildung\2Lehrjahr-A.I\Ict\Modul 295 - Backend für Applikationen realisieren\SkiServiceAbgeschlossen AzinI\Projekt-295-Azin\Projekt 295 Azin\obj\Debug\net7.0\Projekt 295 Azin.genruntimeconfig.cache
 C:\Users\azini\OneDrive - ipso! Bildung\2Lehrjahr-A.I\Ict\Modul 295 - Backend für Applikationen realisieren\SkiServiceAbgeschlossen AzinI\Projekt-295-Azin\Projekt 295 Azin\obj\Debug\net7.0\ref\Projekt 295 Azin.dll
+C:\Users\azini\OneDrive - ipso! Bildung\2Lehrjahr-A.I\Ict\Modul 295 - Backend für Applikationen realisieren\SkiServiceAbgeschlossen AzinI\Projekt-295-Azin\Projekt 295 Azin\bin\Debug\net7.0\Postman\SkiServicePostman.json

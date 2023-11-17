@@ -18,12 +18,14 @@ namespace Projekt_295_Azin.Models
         // Validiert die E-Mail-Adresse mit einem regulären Ausdruck.
         // Die E-Mail muss dem Format 'name@domain.tld' entsprechen.
         [Required(ErrorMessage = "Email ist erforderlich")]
-        [RegularExpression(@".+@.+\..+", ErrorMessage = "Ungültige Email-Adresse")]
+        [EmailAddress]
+        [Display(Description = "Beispiel: user@example.com")]
         public string Emailadresse { get; set; }
 
-        [Required(ErrorMessage = "Telefonnummer ist erforderlich")]
-        [RegularExpression(@"^\+?[0-9\s]+$", ErrorMessage = "Ungültige Telefonnummer")]
         // Die Telefonnummer ist erforderlich und muss ein gültiges Format haben (Zahlen und optional ein führendes Pluszeichen).
+        [Required(ErrorMessage = "Telefonnummer ist erforderlich")]
+        [Phone]
+        [Display(Description = "Beispiel: +1234567890")]
         public string Telefonnummer { get; set; }
 
         [Required(ErrorMessage = "Lieferdatum ist erforderlich")]
