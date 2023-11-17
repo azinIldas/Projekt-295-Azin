@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "c0469829-9af0-4e20-be89-68be13ddf452",
+		"name": "Modul 295",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29157863"
+	},
+	"item": [
+		{
+			"name": "Projekt SkiService Postman",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7037/api/Bestellungen",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"api",
+								"Bestellungen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostAll",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bestellungsId\": 0,\r\n  \"name\": \"string\",\r\n  \"emailadresse\": \"string\",\r\n  \"telefonnummer\": \"string\",\r\n  \"lieferdatum\": \"2023-11-13T10:24:32.235Z\",\r\n  \"service\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7037/api/Bestellungen",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"api",
+								"Bestellungen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOneById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7037/api/Bestellungen/36",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"api",
+								"Bestellungen",
+								"36"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutOneById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bestellungsId\": 36,\r\n    \"name\": \"Aniznn\",\r\n    \"emailadresse\": \"hallo@ildas.ch\",\r\n    \"telefonnummer\": \"+41 627362727\",\r\n    \"lieferdatum\": \"2023-11-22T00:00:00\",\r\n    \"service\": \"RennskiService\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7037/api/Bestellungen/36",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"api",
+								"Bestellungen",
+								"36"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteOneById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7037/api/Bestellungen/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"api",
+								"Bestellungen",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
