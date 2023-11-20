@@ -4,14 +4,16 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Projekt_295_Azin.Models;
-using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_295_Azin.Controllers
 {
     /// <summary>
-    /// Controller zur Handhabung der Benutzer-Authentifizierung
+    /// Kontroller für das Benutzer-Logging
     /// </summary>
     public class BenutzerLoggingController : ControllerBase
     {
@@ -21,7 +23,7 @@ namespace Projekt_295_Azin.Controllers
         /// <summary>
         /// Konstruktor für BenutzerLoggingController
         /// </summary>
-        /// <param name="config">Konfigurationseinstellungen</param>
+        /// <param name="config">Konfiguration</param>
         /// <param name="context">Datenbankkontext</param>
         public BenutzerLoggingController(IConfiguration config, BlogContext context)
         {
@@ -30,18 +32,24 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// API-Endpunkt für Benutzer-Login
+        /// Login-Methode für Benutzer
         /// </summary>
-        /// <param name="login">Login-Modell mit Benutzername und Passwort</param>
-        /// <returns>JWT-Token bei erfolgreicher Authentifizierung, ansonsten Unauthorized</returns>
+        /// <param name="login">Login-Daten</param>
+        /// <returns>Antwort des Servers</returns>
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel login)
+        public async Task<IActionResult> Login([FromBody] LoginModel login)
         {
-            var user = AuthenticateUser(login);
-
-            if (user != null)
+            // Überprüfung des Benutzernamens und Passworts
+            var user = await _context.Benutzer.FirstOrDefaultAsync(u => u.Name == login.Username);
+            if (user != null && ValidatePassword(login.Password, user.Password))
             {
-                var token = GenerateJWTToken(user);
+                var token = GenerateJwtToken(user);
+
+                // Token im Benutzermodell speichern und Datenbank aktualisieren
+                user.JWT = token;
+                _context.Benutzer.Update(user);
+                await _context.SaveChangesAsync();
+
                 return Ok(new { token });
             }
 
@@ -49,74 +57,52 @@ namespace Projekt_295_Azin.Controllers
         }
 
         /// <summary>
-        /// Authentifiziert einen Benutzer basierend auf den Login-Daten
+        /// Generiert ein JWT-Token für den Benutzer
         /// </summary>
-        /// <param name="login">Login-Daten des Benutzers</param>
-        /// <returns>Benutzerobjekt bei erfolgreicher Authentifizierung, ansonsten null</returns>
-        private Benutzer AuthenticateUser(LoginModel login)
-        {
-            var hashedPassword = HashPassword(login.Password);
-            return _context.Benutzer.FirstOrDefault(u => u.Name == login.Username && u.Password == hashedPassword);
-        }
-
-        /// <summary>
-        /// Erzeugt ein JWT für einen authentifizierten Benutzer
-        /// </summary>
-        /// <param name="user">Authentifizierter Benutzer</param>
+        /// <param name="user">Benutzerobjekt</param>
         /// <returns>JWT-Token als String</returns>
-        private string GenerateJWTToken(Benutzer user)
+        private string GenerateJwtToken(Benutzer user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            // Erstellen von Ansprüchen für das Token
             var claims = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Name),
-        new Claim("AdminStatus", user.AdminStatus.ToString()),
-        // Weitere Ansprüche können hier hinzugefügt werden
-    };
+                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                // Weitere Ansprüche nach Bedarf hinzufügen
+            };
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_config["Jwt:DurationInMinutes"])),
-                signingCredentials: credentials
-            );
+                claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: credentials);
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-
-            // Speichern des JWT in der Datenbank
-            user.JWT = tokenString;
-            _context.Benutzer.Update(user);
-            _context.SaveChanges();
-
-            return tokenString;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-
         /// <summary>
-        /// Erzeugt einen Hashwert für ein Passwort
+        /// Validiert das Passwort
         /// </summary>
-        /// <param name="password">Das zu hashende Passwort</param>
-        /// <returns>Der Hashwert des Passworts</returns>
-        private static string HashPassword(string password)
+        /// <param name="inputPassword">Eingegebenes Passwort</param>
+        /// <param name="storedPassword">Gespeichertes Passwort</param>
+        /// <returns>Wahr, wenn das Passwort übereinstimmt</returns>
+        private bool ValidatePassword(string inputPassword, string storedPassword)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            }
+            // Implementieren Sie hier eine sicherere Passwortvergleichslogik
+            return inputPassword == storedPassword;
         }
     }
 
     /// <summary>
-    /// Modell für Benutzer-Login-Daten
+    /// Modell für Login-Daten
     /// </summary>
     public class LoginModel
     {
         public string Username { get; set; }
         public string Password { get; set; }
     }
-
 }

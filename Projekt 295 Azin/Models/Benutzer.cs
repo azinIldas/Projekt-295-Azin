@@ -36,6 +36,6 @@ namespace Projekt_295_Azin.Models
         /// <summary>
         /// JWT token
         /// </summary>
-        public string JWT { get; set; }
+        public string? JWT { get; set; }
     }
 }
