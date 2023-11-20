@@ -3,8 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Projekt_295_Azin;
-using Projekt_295_Azin.Models; 
+using Projekt_295_Azin.Models;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
@@ -72,10 +71,10 @@ namespace Projekt_295_Azin.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
-                new Claim("AdminStatus", user.AdminStatus.ToString()),
-                // Weitere Ansprüche können hier hinzugefügt werden
-            };
+        new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+        new Claim("AdminStatus", user.AdminStatus.ToString()),
+        // Weitere Ansprüche können hier hinzugefügt werden
+    };
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
@@ -85,8 +84,16 @@ namespace Projekt_295_Azin.Controllers
                 signingCredentials: credentials
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            // Speichern des JWT in der Datenbank
+            user.JWT = tokenString;
+            _context.Benutzer.Update(user);
+            _context.SaveChanges();
+
+            return tokenString;
         }
+
 
         /// <summary>
         /// Erzeugt einen Hashwert für ein Passwort
@@ -111,4 +118,5 @@ namespace Projekt_295_Azin.Controllers
         public string Username { get; set; }
         public string Password { get; set; }
     }
+
 }
