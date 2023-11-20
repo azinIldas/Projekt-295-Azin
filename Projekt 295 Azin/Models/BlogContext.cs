@@ -31,6 +31,9 @@ public partial class BlogContext : DbContext
     /// </summary>
     public virtual DbSet<Bestellungen> Bestellungens { get; set; }
 
+    // Fügen Sie diese Zeile hinzu
+    public virtual DbSet<Benutzer> Benutzer { get; set; }
+
     // Konfiguration des Datenbankkontextes
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=localhost;Database=BackendSkiService;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -63,8 +66,20 @@ public partial class BlogContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
         });
+        modelBuilder.Entity<Benutzer>(entity =>
+        {
+            entity.HasKey(e => e.BenutzerID).HasName("PK_Benutzer");
 
-        OnModelCreatingPartial(modelBuilder);
+            entity.ToTable("Benutzer");
+
+            entity.Property(e => e.BenutzerID).HasColumnName("BenutzerID");
+            entity.Property(e => e.Name).HasMaxLength(255).IsUnicode(false);
+            entity.Property(e => e.Password).HasMaxLength(255).IsUnicode(false);
+            entity.Property(e => e.AdminStatus).HasColumnType("bit");
+            entity.Property(e => e.JWT).IsUnicode(false);
+            ;
+        });
+    OnModelCreatingPartial(modelBuilder);
     }
 
     // Zusätzliche partielle Methode für erweiterte Konfigurationen

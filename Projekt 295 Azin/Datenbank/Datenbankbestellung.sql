@@ -50,7 +50,10 @@ CREATE TABLE Benutzer (
     Password VARCHAR(255) NOT NULL,
 
     -- Spalte für den Adminstatus,  true oder false
-    AdminStatus BIT NOT NULL
+    AdminStatus BIT NOT NULL,
+
+    -- Spalte um JWT token zu speichern
+    JWT VARCHAR(max)
 );
 
 -- Optional: Einfügen eines Testbenutzers in die Tabelle
