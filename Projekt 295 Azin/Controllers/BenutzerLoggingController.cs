@@ -56,6 +56,88 @@ namespace Projekt_295_Azin.Controllers
             return Unauthorized();
         }
 
+        private bool BestellungExists(int id)
+        {
+            return _context.Bestellungens.Any(e => e.BestellungsId == id);
+        }
+
+
+        [HttpPut("login/{id}")]
+        public async Task<IActionResult> PutBestellung(int id, [FromBody] Bestellungen bestellung)
+        {
+            // Validate JWT Token
+            var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            if (token == null || !IsValidToken(token))
+            {
+                return Unauthorized(); // 401 Unauthorized if token is invalid
+            }
+
+            // Existing code for checking ID and updating the order
+            if (id != bestellung.BestellungsId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(bestellung).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BestellungExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool IsValidToken(string token)
+        {
+            var user = _context.Benutzer.FirstOrDefault(u => u.JWT == token);
+
+            if (user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        [HttpDelete("delete-customer/{id}/{token}")]
+        public async Task<IActionResult> DeleteCustomer(int id, string token)
+        {
+            // Validate JWT Token
+            if (string.IsNullOrEmpty(token) || !IsValidToken(token))
+            {
+                return Unauthorized(); // 401 Unauthorized if token is invalid
+            }
+
+            // Find the customer to be deleted
+            var customer = await _context.Bestellungens.FirstOrDefaultAsync(u => u.BestellungsId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            // Delete the customer
+            _context.Bestellungens.Remove(customer);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // 204 No Content as a response for successful deletion
+        }
+
+
+
         /// <summary>
         /// Generiert ein JWT-Token für den Benutzer
         /// </summary>
