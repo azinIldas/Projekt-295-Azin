@@ -10,6 +10,97 @@
 			"name": "Projekt SkiService Postman",
 			"item": [
 				{
+					"name": "LoginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"TestUser\",\r\n    \"password\": \"TestPasswort\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7037/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutCustomer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"bestellungsId\": 2,\r\n    \"name\": \"Hallowww\",\r\n    \"emailadresse\": \"user@example.com\",\r\n    \"telefonnummer\": \"123456789\",\r\n    \"lieferdatum\": \"2023-11-21T13:47:01.436Z\",\r\n    \"service\": \"Klein\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7037/login/2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZXN0VXNlciIsImp0aSI6ImFiZmZlODI1LTVmYjEtNGIwNC05OTgxLTVkNjk0ZTNmNDM4ZSIsImV4cCI6MTcwMDU3ODYyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAzNyIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTUwMCJ9._TRHAo0sbZT147joGsqImNJaUVZe4i3ML1DqK_MXwJ8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"login",
+								"2",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZXN0VXNlciIsImp0aSI6ImFiZmZlODI1LTVmYjEtNGIwNC05OTgxLTVkNjk0ZTNmNDM4ZSIsImV4cCI6MTcwMDU3ODYyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAzNyIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTUwMCJ9._TRHAo0sbZT147joGsqImNJaUVZe4i3ML1DqK_MXwJ8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"bestellungsId\": 2,\r\n    \"name\": \"Hallowww\",\r\n    \"emailadresse\": \"user@example.com\",\r\n    \"telefonnummer\": \"123456789\",\r\n    \"lieferdatum\": \"2023-11-21T13:47:01.436Z\",\r\n    \"service\": \"Klein\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7037/delete-customer/2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZXN0VXNlciIsImp0aSI6ImFiZmZlODI1LTVmYjEtNGIwNC05OTgxLTVkNjk0ZTNmNDM4ZSIsImV4cCI6MTcwMDU3ODYyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAzNyIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTUwMCJ9._TRHAo0sbZT147joGsqImNJaUVZe4i3ML1DqK_MXwJ8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7037",
+							"path": [
+								"delete-customer",
+								"2",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUZXN0VXNlciIsImp0aSI6ImFiZmZlODI1LTVmYjEtNGIwNC05OTgxLTVkNjk0ZTNmNDM4ZSIsImV4cCI6MTcwMDU3ODYyOCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAzNyIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTUwMCJ9._TRHAo0sbZT147joGsqImNJaUVZe4i3ML1DqK_MXwJ8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetAll",
 					"request": {
 						"method": "GET",
